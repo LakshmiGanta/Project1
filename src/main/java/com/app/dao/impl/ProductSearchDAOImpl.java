@@ -16,7 +16,7 @@ import com.app.exception.BusinessException;
 import com.app.model.Products;
 
 import com.app.search.service.ProductSearchService;
-import com.mysql.cj.log.Log; 
+
 
 public class ProductSearchDAOImpl implements ProductSearchDAO {
 	private static Logger log = Logger.getLogger(ProductSearchDAOImpl.class);
@@ -26,20 +26,20 @@ public class ProductSearchDAOImpl implements ProductSearchDAO {
 		// TODO Auto-generated method stub
 		List<Products> productList=new ArrayList<>();
 		try(Connection connection=MySqlDbConnection.getConnection()){
-			String sql="Select id,prod_name,no_of_prods,category,mfr_name from products where prod_name=?";
+			String sql="Select prodId,prodName,noOfProds,category,mfrName,price from products where prodName=?";
 			PreparedStatement preparedStatement=connection.prepareStatement(sql);
 			preparedStatement.setString(1, prodName);
 			ResultSet resultSet=preparedStatement.executeQuery();
 			while(resultSet.next()) {
 				Products product =new Products();
-				product.setId(resultSet.getInt("id"));
-				product.setProdName(resultSet.getString("prod_name"));
-				product.setNoOfProds(resultSet.getInt("no_of_prods"));
+				product.setProdId(resultSet.getInt("prodId"));
+				product.setProdName(resultSet.getString("prodName"));
+				product.setNoOfProds(resultSet.getInt("noOfProds"));
 				product.setCategory(resultSet.getString("category"));
-				product.setMfrName(resultSet.getString("mfr_name"));
+				product.setMfrName(resultSet.getString("mfrName"));
+				product.setPrice(resultSet.getInt("price"));
 				productList.add(product);
-			}
-			
+			}			
 			if(productList.size()==0) {
 				throw new BusinessException("No products available "+prodName);
 			}
@@ -57,17 +57,18 @@ public class ProductSearchDAOImpl implements ProductSearchDAO {
 		// TODO Auto-generated method stub
 		List<Products> productList=new ArrayList<>();
 		try(Connection connection=MySqlDbConnection.getConnection()){
-			String sql="Select id,prod_name,no_of_prods,category,mfr_name from products where mfr_name=?";
+			String sql="Select prodId,prodName,noOfProds,category,mfrName,price from products where mfrName=?";
 			PreparedStatement preparedStatement=connection.prepareStatement(sql);
 			preparedStatement.setString(1, mfrName);
 			ResultSet resultSet=preparedStatement.executeQuery();
 			while(resultSet.next()) {
 				Products product =new Products();
-				product.setId(resultSet.getInt("id"));
-				product.setProdName(resultSet.getString("prod_name"));
-				product.setNoOfProds(resultSet.getInt("no_of_prods"));
+				product.setProdId(resultSet.getInt("prodId"));
+				product.setProdName(resultSet.getString("prodName"));
+				product.setNoOfProds(resultSet.getInt("noOfProds"));
 				product.setCategory(resultSet.getString("category"));
-				product.setMfrName(resultSet.getString("mfr_name"));
+				product.setMfrName(resultSet.getString("mfrName"));
+				product.setPrice(resultSet.getInt("price"));
 				productList.add(product);
 			}
 
@@ -94,17 +95,18 @@ public class ProductSearchDAOImpl implements ProductSearchDAO {
 		// TODO Auto-generated method stub
 		List<Products> productList=new ArrayList<>();
 		try(Connection connection=MySqlDbConnection.getConnection()){
-			String sql="Select id,prod_name,no_of_prods,category,mfr_name from products where category=?";
+			String sql="Select prodId,prodName,noOfProds,category,mfrName,price from products where category=?";
 			PreparedStatement preparedStatement=connection.prepareStatement(sql);
 			preparedStatement.setString(1, category);
 			ResultSet resultSet=preparedStatement.executeQuery();
 			while(resultSet.next()) {
 				Products product =new Products();
-				product.setId(resultSet.getInt("id"));
-				product.setProdName(resultSet.getString("prod_name"));
-				product.setNoOfProds(resultSet.getInt("no_of_prods"));
+				product.setProdId(resultSet.getInt("prodId"));
+				product.setProdName(resultSet.getString("prodName"));
+				product.setNoOfProds(resultSet.getInt("noOfProds"));
 				product.setCategory(resultSet.getString("category"));
-				product.setMfrName(resultSet.getString("mfr_name"));
+				product.setMfrName(resultSet.getString("mfrName"));
+				product.setPrice(resultSet.getInt("price"));
 				productList.add(product);
 			}
 

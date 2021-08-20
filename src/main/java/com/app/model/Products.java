@@ -2,23 +2,23 @@ package com.app.model;
 
 public class Products {
 	
-	private int id;
+	private int prodId;
 	private String prodName;
 	private int noOfProds;
 	private String category;
 	private String mfrName;
-	
+	private int price;
 	
 	public Products() {
 		
 	}
 
-	public int getId() {
-		return id;
+	public int getProdId() {
+		return prodId;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setProdId(int prodId) {
+		this.prodId = prodId;
 	}
 
 	public String getProdName() {
@@ -53,28 +53,37 @@ public class Products {
 		this.mfrName = mfrName;
 	}
 	
+	public int getPrice() {
+		return price;
+	}
+
+	public void setPrice(int price) {
+		this.price = price;
+	}
+
+	
+	
 	//sources--> generate tostring()
 	
 	@Override
 	public String toString() {
-		return "Products [id=" + id + ", prodName=" + prodName + ", noOfProds=" + noOfProds + ", category=" + category
-				+ ", mfrName=" + mfrName + "]";
+		return "Products [Product ID = " + prodId + ", Product Name = " + prodName + ", Products Available =" + noOfProds + ", Category = " + category
+				+ ", Manufacturer Name = " + mfrName + ", Item Price = " + price + "]";
 	}
-	
-	//sources--> generate ctor using fields
-	public Products(int id, String prodName, int noOfProds, String category, String mfrName) {
+
+	public Products(int prodId, String prodName, int noOfProds, String category, String mfrName, int price) {
 		super();
-		this.id = id;
+		this.prodId = prodId;
 		this.prodName = prodName;
 		this.noOfProds = noOfProds;
 		this.category = category;
 		this.mfrName = mfrName;
+		this.price = price;
 	}
+
 	
 	
-
-
-
+	
 	
 	
 }

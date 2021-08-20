@@ -14,14 +14,13 @@ public class ProductSearchServiceImpl implements ProductSearchService {
 	private ProductSearchDAO productSearchDAO=new ProductSearchDAOImpl();
 	
 	@Override
-	public List<Products> getProductsByProdName(String prodName) throws BusinessException {
-		// TODO Auto-generated method stub
+	public List<Products> getProductsByProdName(String prodName) throws BusinessException {		
 		List<Products> productList=null;
 		if(prodName.matches("[a-zA-Z]{2,10}")) {
 			//code here to DAO
 			productList=productSearchDAO.getProductsByProdName(prodName);
-		}else {
-			throw new BusinessException("Invalid product name : "+prodName);
+		}else {			
+			throw new BusinessException("Invalid Product name : "+prodName);
 		}
 		return productList;
 	}
@@ -34,7 +33,7 @@ public class ProductSearchServiceImpl implements ProductSearchService {
 			//code here to DAO
 			productList=productSearchDAO.getProductsByMfrName(mfrName);
 		}else {
-			throw new BusinessException("Invalid mfrName name : "+mfrName);
+			throw new BusinessException("Invalid Manufacturer Name : "+mfrName);
 		}
 		return productList;
 	}
@@ -42,7 +41,7 @@ public class ProductSearchServiceImpl implements ProductSearchService {
 	
 	
 	@Override
-	public Products getProductsById(int id) throws BusinessException {
+	public List<Products> getProductsById(int id) throws BusinessException {
 		// TODO Auto-generated method stub
 		return null;
 	}
