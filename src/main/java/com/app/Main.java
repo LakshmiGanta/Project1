@@ -28,6 +28,7 @@ public class Main {
 	public static void main(String[] args) {
 
 		Scanner scanner = new Scanner(System.in);
+		DisplayFunctions  displayFunctions = new DisplayFunctions();
 		log.info("Welcome to Online Shopping Mall");
 		log.info("==========================================");
 		log.info("Main Menu");
@@ -40,7 +41,9 @@ public class Main {
 			log.info("Please enter your choice(1-4)");
 			
 			try {
-				loginChoice = Integer.parseInt(scanner.nextLine());				
+				loginChoice = Integer.parseInt(scanner.nextLine());
+				displayFunctions.checkChoice(4, loginChoice);
+				
 			}  
 			catch (NumberFormatException e) {
 				log.warn(e.getMessage());
@@ -89,6 +92,8 @@ public class Main {
 								log.info("Please enter your choice(1-4)");
 								try {
 									viewChoice=Integer.parseInt(scanner.nextLine());
+									displayFunctions.checkChoice(4, viewChoice);
+									
 								} catch (NumberFormatException e) {
 									log.warn(e.getMessage());
 								}
@@ -109,7 +114,9 @@ public class Main {
 										log.info("6)PreviousMenu");
 										log.info("Please enter your choice(1-6)");
 										try {
-											searchChoice=Integer.parseInt(scanner.nextLine());											
+											searchChoice=Integer.parseInt(scanner.nextLine());
+											displayFunctions.checkChoice(6, searchChoice);											
+											
 										} catch (NumberFormatException e) {
 											log.warn(e.getMessage());
 										}
@@ -177,7 +184,7 @@ public class Main {
 												addProductToCart.AddProductToCartList(productList, productName, customerId);
 																						
 											}catch (BusinessException e) {
-												log.info("(Please enter Name of the Product)");
+												log.info("(Please entervalid product Id)");
 												log.warn(e.getMessage());
 											}	
 											break;
@@ -193,7 +200,7 @@ public class Main {
 										}
 									
 									}while(searchChoice!=6);
-									
+									log.info("please enter valid choice");
 									break;
 								case 2:
 									log.info("View Orders");	
@@ -263,7 +270,7 @@ public class Main {
 						log.info("you exited succesfully ");	
 						break;
 				}
-		} while (loginChoice != 4);
+		} while (loginChoice != 4);		
 		scanner.close();
 	}	
 }

@@ -43,7 +43,14 @@ public class ProductSearchServiceImpl implements ProductSearchService {
 	@Override
 	public List<Products> getProductsById(int id) throws BusinessException {
 		// TODO Auto-generated method stub
-		return null;
+		List<Products> productList=null;
+		if(id>100 && id<1000) {
+			//code here to DAO
+			productList=productSearchDAO.getProductsById(id);
+		}else {
+			throw new BusinessException("Invalid product id : "+id);
+		}
+		return productList;
 	}
 	
 	@Override

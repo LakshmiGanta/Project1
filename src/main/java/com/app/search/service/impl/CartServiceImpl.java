@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
+import com.app.DisplayFunctions;
 import com.app.Main;
 import com.app.dao.CartDAO;
 import com.app.dao.impl.CartDAOImpl;
@@ -17,14 +18,18 @@ public class CartServiceImpl implements CartService {
 	
 	private static Logger log = Logger.getLogger(Main.class);
 	private CartDAO cartDAO = new CartDAOImpl();
+	DisplayFunctions displayFunctions = new DisplayFunctions();
 
 	@Override
 	public boolean addCart(int customerId, int productId, String productName,int quantity, int price) throws BusinessException {
 		// TODO Auto-generated method stub
 		boolean addedToCart = false;
+		List<Cart> cartList = new ArrayList<>();
 		addedToCart = cartDAO.addCart(customerId, productId, productName, quantity, price);
 		if(addedToCart) {
 			log.info("Product added Successfully\n");
+			cartList = viewCart(customerId);
+			displayFunctions.DisplayCart(cartList);
 		}else {
 			log.info("Sorry....Unable to add Product.\n");
 		}

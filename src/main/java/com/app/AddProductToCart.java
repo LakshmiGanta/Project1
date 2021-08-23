@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import org.apache.log4j.Logger;
 
+import com.app.exception.BusinessException;
 import com.app.model.Products;
 import com.app.search.service.CartService;
 import com.app.search.service.impl.CartServiceImpl;
@@ -23,8 +24,10 @@ public class AddProductToCart {
 		if(productList!=null && productList.size()>0) {														
 			for(Products i:productList) {	
 				log.info(i);														
-			}										
-			log.info("\nNumber of "+prodName+ " available are "+productList.get(0).getNoOfProds());													
+			}						
+			int prodAvailable = productList.get(0).getNoOfProds();
+			log.info("\nNumber of "+prodName+ " available are "+ prodAvailable);
+			
 			int choice=0;
 			do {
 				log.info("1)Enter 1 to add product into cart");
@@ -36,18 +39,32 @@ public class AddProductToCart {
 					switch (choice) {
 					case 1:		
 						log.info("Enter the Number of products you want to add in cart");
-						int quantity = scanner.nextInt();																
+						int quantity = scanner.nextInt();
 						int productId = productList.get(0).getProdId();																
-						int price = productList.get(0).getPrice();																
-						int totalPrice = quantity * price;
-						try {
-							cartService.addCart(customerId, productId, prodName, quantity, totalPrice);
-						} catch (Exception e) {
-							log.warn(e.getMessage());
+						int price = productList.get(0).getPrice();	
+						int totalPrice =0;
+						if(quantity > prodAvailable) {
+							log.info("Please select "+ prodName + " less than or equal to " + prodAvailable );							
+							int quantity2 = scanner.nextInt();
+							totalPrice = quantity2 * price;
+							try {
+								cartService.addCart(customerId, productId, prodName, quantity, totalPrice);
+							} catch (Exception e) {
+								log.warn(e.getMessage());
+							}
 						}
-																						
+						else {																				
+							totalPrice = quantity * price;
+							try {
+								cartService.addCart(customerId, productId, prodName, quantity, totalPrice);
+							} catch (Exception e) {
+								log.warn(e.getMessage());
+							}															
+						}
+																					
 						break;
 					case 2:	
+						log.info("Redirecting to Previous Menu");
 						break;
 						
 					}

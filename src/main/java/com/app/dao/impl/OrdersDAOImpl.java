@@ -40,9 +40,7 @@ public class OrdersDAOImpl implements OrdersDAO{
 			    preparedStatement.addBatch();
 			}
 			int[] updateCounts = preparedStatement.executeBatch();
-			//System.out.println("update Status : "+Arrays.toString(updateCounts));
-			//connection.commit();
-            //connection.setAutoCommit(true);
+			//System.out.println("update Status : "+Arrays.toString(updateCounts));			
 			placeOrderStatus = true;
 			
 		}catch (ClassNotFoundException | SQLException e) {

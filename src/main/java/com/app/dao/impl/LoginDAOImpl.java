@@ -61,36 +61,15 @@ public class LoginDAOImpl  implements LoginDAO{
     			customer.setCustomerId(resultSet.getInt("CustomerId"));
 				customer.setEmailId(resultSet.getString("EmailId"));
 				customer.setName(resultSet.getString("Name"));
-				custList.add(customer);
-//				if(resultSet.getString("EmailId").equals(emailId) ) {
-//					if(resultSet.getString("Password").equals(pwd) ) {
-//						custAccess = 2;
-//						break;
-//					}else {
-//						log.info("Enter Valid Password");
-//						custAccess = 1;		
-//						break;
-//					}					
-//				}	
-//				custAccess = 0;	
-//				break;
-			}
-			
-//			if(custList.size()==0) {
-//				throw new BusinessException("No user with mail ID: "+emailId);
-//			}
-//			
-//			if(custList.size()==1) {
-//				custAccess = true;
-//			}						
+				custList.add(customer);				
+			}					
 		}
 		catch (ClassNotFoundException | SQLException e ) {
 			// TODO: handle exception
 			log.error(e);
 			throw new BusinessException("Internal error occured contact sysadmin");
 		
-		}	
-		//log.info("connection closed");
+		}			
 		return custList;
 	}
 

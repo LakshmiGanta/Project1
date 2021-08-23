@@ -18,8 +18,7 @@ public class LoginServiceImpl implements LoginService{
 	
 	
 	@Override
-	public boolean registerCustomer(String newUserName, String newMailId, String newPwd) throws BusinessException {
-		// TODO Auto-generated method stub
+	public boolean registerCustomer(String newUserName, String newMailId, String newPwd) throws BusinessException {	
 		boolean newCustReg = false;		
 		newCustReg = LoginDAO.registerCustomer(newUserName, newMailId, newPwd);
 		
@@ -33,42 +32,23 @@ public class LoginServiceImpl implements LoginService{
 	}
 
 	@Override
-	public List<Customer> validateCustomer(String emailId, String password) throws BusinessException {
-		// TODO Auto-generated method stub
-		//boolean custAccess = false;
-		//int custAccessStatus =0;
+	public List<Customer> validateCustomer(String emailId, String password) throws BusinessException {		
 		List<Customer> custList=null;
+		
 		custList = LoginDAO.validateCustomer(emailId, password);
-		if(custList.size()==0) {
+		if(custList.size()==1) {
+			log.info("Login Successfull\n");			
+		}
+		else {			
 			log.info("Invalid user...\n");
 			throw new BusinessException("Please try with valid Email Id and Password\n");
 		}
-		else {
-			//custAccess = true;
-			log.info("Login Successfull\n");
-		}
-		//log.info("custAccessStatus  "+custAccessStatus);
-//		if(custAccessStatus==0) {
-//			log.info("Invalid user... Please try with valid Email Id and Password\n");
-//			custAccess = false;
-//		}
-//		else if(custAccessStatus==1) {
-//			log.info("Please try with valid Password\n");
-//			custAccess = false;
-//		}
-//		else if(custAccessStatus==2) {
-//			log.info("Login Successfull\n");
-//			custAccess = true;
-//		}
-//		else {
-//			throw new BusinessException("Please Contact SysAdmin");
-//		}
+		
 		return custList;
 	}
 
 	@Override
-	public boolean validateEmployee(String emailId, String password) throws BusinessException {
-		// TODO Auto-generated method stub
+	public boolean validateEmployee(String emailId, String password) throws BusinessException {	
 		boolean empAccess = false;
 		
 		empAccess = LoginDAO.validateEmployee(emailId, password);

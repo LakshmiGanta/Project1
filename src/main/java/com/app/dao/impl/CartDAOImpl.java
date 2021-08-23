@@ -83,11 +83,7 @@ public class CartDAOImpl implements CartDAO{
 				Cart cart = (Cart) iterator.next();
 			    preparedStatement.setInt(1, cart.getCustomerId());			   			   	  
 			    preparedStatement.addBatch();
-			}
-			//int[] updateCounts = preparedStatement.executeBatch();
-			//System.out.println("update Status : "+Arrays.toString(updateCounts));
-			//connection.commit();
-            //connection.setAutoCommit(true);
+			}			
             emptyCartStatus = true;
 			
 		}catch (ClassNotFoundException | SQLException e) {

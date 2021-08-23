@@ -16,6 +16,7 @@ import com.app.search.service.impl.OrderServiceImpl;
 public class ViewOrPlaceCart{
 	private static Logger log = Logger.getLogger(Main.class);
 	Scanner scanner = new Scanner(System.in);
+	DisplayFunctions displayFunctions = new DisplayFunctions();
 	
 	CartService cartService = new CartServiceImpl();
 	OrderService orderService = new OrderServiceImpl();
@@ -28,16 +29,7 @@ public class ViewOrPlaceCart{
 		try {												
 			cartList = cartService.viewCart(customerId);
 			
-			if(cartList.size()==0) {
-				throw new BusinessException("No products available in your cart");
-			}			
-			if(cartList!=null && cartList.size()>0) {														
-				for(Cart cart:cartList) {	
-					log.info(cart);														
-				}	
-				log.info("\n");
-															
-			}
+			displayFunctions.DisplayCart(cartList);
 			
 			log.info("Do u want to place order.. For placing order select ");
 			log.info("1) Yes");
